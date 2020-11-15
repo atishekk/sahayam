@@ -10,12 +10,12 @@ import UserDashBoard from "./Components/Userdashboard"
 const App = () => {
     return (
         <React.Fragment>
+            <MainUI/>
             <Switch>
-                <Route exact path={"/"} component={MainUI} />
-                <Route path={"/createuser"} component={CreateUser}/>
-                <Route path={"/signin"} component={SignIn} />
-                <Route path={"/dashboardUser"} component={UserDashBoard} />
-                <Route path={"/dashboardNGO"} component={NGODashBoard} />
+                <Route path="/createuser" component={CreateUser}/>
+                <Route path="/signin" component={SignIn} />
+                <Route path="/dashboardUser" component={UserDashBoard} />
+                <Route path="/dashboardNGO" component={NGODashBoard} />
             </Switch>
         </React.Fragment>
     )
