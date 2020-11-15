@@ -165,7 +165,7 @@ export default function PersistentDrawerLeft() {
                   <PersonAddIcon />
                 </ListItemIcon>
                 <Link to="/createuser" className={classes.LinkStyle}>
-                  <ListItemText primary="Signup" />
+                  <ListItemText primary="Sign Up" />
                 </Link>
               </ListItem>
               <ListItem button key="signin">
@@ -173,7 +173,7 @@ export default function PersistentDrawerLeft() {
                   <AccountCircleIcon />
                 </ListItemIcon>
                 <Link to="/signin" className={classes.LinkStyle}>
-                  <ListItemText primary="SignIn" />
+                  <ListItemText primary="Sign In" />
                 </Link>
               </ListItem>
             </List>
