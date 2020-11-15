@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Container, Typography, TextField, Grid, Button, Chip } from '@material-ui/core';
 import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+import { Radio, RadioGroup, FormControlLabel } from '@material-ui/core';
+
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -23,7 +25,15 @@ const useStyles = makeStyles({
     position: 'relative',
     marginTop: '4%'
   },
-  inputStyles: {}
+  inputStyles: {},
+  radios: {
+    margin: '30px auto',
+    height: '50px',
+    width: '50%',
+
+    display: 'flex',
+    justifyContent: 'space-between'
+  }
 });
 
 const theme = createMuiTheme({
@@ -48,8 +58,13 @@ function CreateUser() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
 
   const onFormSubmit = async () => {
+    if (email === '' || password === '') {
+      console.log('email password cant be blank');
+    }
+
     Auth.createUserWithEmailAndPassword(email, password)
       .then(function () {
         console.log('added');
@@ -73,7 +88,7 @@ function CreateUser() {
             <Typography variant="h4" style={{ textAlign: 'center' }}>
               SIGNUP
             </Typography>
-            <div className={classes.root}>
+            <div>
               <Grid container spacing={1}>
                 <Grid container item xs={12} spacing={3} className={classes.inputContainer}>
                   <Grid item xs={4}>
@@ -107,10 +122,27 @@ function CreateUser() {
                     />
                   </Grid>
                 </Grid>
+                <RadioGroup
+                  aria-label="Select Role"
+                  name="role"
+                  value={role}
+                  onChange={(e) => {
+                    setRole(e.target.value);
+                  }}
+                  className={classes.radios}
+                >
+                  <FormControlLabel
+                    value="NGO"
+                    control={<Radio />}
+                    label="NGO"
+                    style={{ marginRight: '100px' }}
+                  />
+                  <FormControlLabel value="volunteer" control={<Radio />} label="Volunteer" />
+                </RadioGroup>
                 <Button
                   variant="contained"
                   color="secondary"
-                  style={{ margin: '60px auto', borderRadius: '50px', padding: '12px 20px' }}
+                  style={{ margin: '100px auto', borderRadius: '50px', padding: '10px 20px' }}
                   onClick={onFormSubmit}
                 >
                   Submit

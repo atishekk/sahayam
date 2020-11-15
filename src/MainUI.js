@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider, createMuiTheme, useTheme } from '@material-ui/core/styles';
 import {
   Drawer,
   CssBaseline,
@@ -26,6 +26,23 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
+
+const theme = createMuiTheme({
+  root: {
+    flexGrow: 1
+  },
+  palette: {
+    primary: {
+      main: '#2196f3'
+    },
+    secondary: {
+      main: '#f50057'
+    }
+  },
+  typography: {
+    fontFamily: ['sans-serif', '-apple-system', 'BlinkMacSystemFont'].join(',')
+  }
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,88 +120,92 @@ export default function PersistentDrawerLeft() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+      <CssBaseline>
+        <ThemeProvider theme={theme}>
+          <AppBar
+            style={{ backgroundColor: '#2196f3' }}
+            position="fixed"
+            className={clsx(classes.appBar, {
+              [classes.appBarShift]: open
+            })}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Sahayam
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          <ListItem button key="signup">
-            <ListItemIcon>
-              <PersonAddIcon />
-            </ListItemIcon>
-            <Link to="/createuser" className={classes.LinkStyle}>
-              <ListItemText primary="Signup" />
-            </Link>
-          </ListItem>
-          <ListItem button key="signin">
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <Link to="/signin" className={classes.LinkStyle}>
-              <ListItemText primary="SignIn" />
-            </Link>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button key="dashboardUser">
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <Link to="/dashboardUser" className={classes.LinkStyle}>
-              <ListItemText primary="Dashboard" />
-            </Link>
-          </ListItem>
-          <ListItem button key="dashboardNGO">
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <Link to="/dashboardNGO" className={classes.LinkStyle}>
-              <ListItemText primary="Dashboard" />
-            </Link>
-          </ListItem>
-        </List>
-      </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open
-        })}
-      >
-        <div className={classes.drawerHeader} />
-      </main>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, open && classes.hide)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap>
+                Sahayam
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <div className={classes.drawerHeader}>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              </IconButton>
+            </div>
+            <Divider />
+            <List>
+              <ListItem button key="signup">
+                <ListItemIcon>
+                  <PersonAddIcon />
+                </ListItemIcon>
+                <Link to="/createuser" className={classes.LinkStyle}>
+                  <ListItemText primary="Signup" />
+                </Link>
+              </ListItem>
+              <ListItem button key="signin">
+                <ListItemIcon>
+                  <AccountCircleIcon />
+                </ListItemIcon>
+                <Link to="/signin" className={classes.LinkStyle}>
+                  <ListItemText primary="SignIn" />
+                </Link>
+              </ListItem>
+            </List>
+            <Divider />
+            <List>
+              <ListItem button key="dashboardUser">
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <Link to="/dashboardUser" className={classes.LinkStyle}>
+                  <ListItemText primary="Dashboard" />
+                </Link>
+              </ListItem>
+              <ListItem button key="dashboardNGO">
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <Link to="/dashboardNGO" className={classes.LinkStyle}>
+                  <ListItemText primary="Dashboard" />
+                </Link>
+              </ListItem>
+            </List>
+          </Drawer>
+          <main
+            className={clsx(classes.content, {
+              [classes.contentShift]: open
+            })}
+          >
+            <div className={classes.drawerHeader} />
+          </main>
+        </ThemeProvider>
+      </CssBaseline>
     </div>
   );
 }
