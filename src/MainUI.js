@@ -140,9 +140,11 @@ export default function PersistentDrawerLeft({ role }) {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" noWrap>
-                Sahayam
-              </Typography>
+              <Link to="/">
+                <Typography variant="h6" noWrap>
+                  Sahayam
+                </Typography>
+              </Link>
             </Toolbar>
           </AppBar>
           <Drawer

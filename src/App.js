@@ -5,6 +5,7 @@ import CreateUser from './Components/CreateUser';
 import NGODashBoard from './Components/NGOdashboard';
 import SignIn from './Components/SignIn';
 import UserDashBoard from './Components/Userdashboard';
+import AboutUs from "./Components/AboutUS"
 
 const App = () => {
   const [role, setRole] = React.useState('');
@@ -14,6 +15,7 @@ const App = () => {
     <React.Fragment>
       <MainUI role={role} />
       <Switch>
+          <Route exact path="/" component={AboutUs} />
         <Route path="/createuser" component={CreateUser} />
         <Route
           path="/signin"
