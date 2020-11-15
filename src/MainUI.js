@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,20 +32,20 @@ export default function MainUI() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            <Link to={"/"} color={"inherit"}>
+            <Link to={'/'} color={'inherit'}>
               Sahayam
             </Link>
           </Typography>
-          <Link to={"/createuser"}>
+          <Link to="/createuser">
             <Button>Create</Button>
           </Link>
-          <Link to={"/signin"}>
+          <Link to="/signin">
             <Button>SignIn</Button>
           </Link>
-          <Link to={"/dashboardUser"}>
+          <Link to="/dashboardUser">
             <Button>DashBoard (USER)</Button>
           </Link>
-          <Link to={"/dashboardNGO"}>
+          <Link to="/dashboardNGO">
             <Button>DashBoard (NGO)</Button>
           </Link>
         </Toolbar>

@@ -1,11 +1,10 @@
 import React from 'react';
-import {Route, Switch} from "react-router-dom"
+import { Route, Switch } from 'react-router-dom';
 import MainUI from './MainUI';
-import CreateUser from "./Components/CreateUser"
-import NGODashBoard from "./Components/NGOdashboard"
-import SignIn from "./Components/SignIn"
-import UserDashBoard from "./Components/Userdashboard"
-
+import CreateUser from './Components/CreateUser';
+import NGODashBoard from './Components/NGOdashboard';
+import SignIn from './Components/SignIn';
+import UserDashBoard from './Components/Userdashboard';
 
 const App = () => {
     return (
@@ -21,4 +20,4 @@ const App = () => {
     )
 }
 
-export default App
+export default App;
