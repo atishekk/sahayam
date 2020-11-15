@@ -3,13 +3,13 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 var firebaseConfig = {
-  apiKey: 'AIzaSyCj0UwlG8w_GYUFA3JjsCf-nmck9Ly7pNM',
-  authDomain: 'hackathon-9f324.firebaseapp.com',
-  databaseURL: 'https://hackathon-9f324.firebaseio.com',
-  projectId: 'hackathon-9f324',
-  storageBucket: 'hackathon-9f324.appspot.com',
-  messagingSenderId: '777529751920',
-  appId: '1:777529751920:web:24ba576cd5b8b25b7e37b5'
+  apiKey: 'AIzaSyAvdoCmjDRTICNTQj07Ngjo8EPGslw2XTw',
+  authDomain: 'hackathon2-10e31.firebaseapp.com',
+  databaseURL: 'https://hackathon2-10e31.firebaseio.com',
+  projectId: 'hackathon2-10e31',
+  storageBucket: 'hackathon2-10e31.appspot.com',
+  messagingSenderId: '1023561491940',
+  appId: '1:1023561491940:web:ed3d51e7957711350f53f1'
 };
 
 // Initialize Firebase

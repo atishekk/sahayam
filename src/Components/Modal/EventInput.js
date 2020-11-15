@@ -89,6 +89,10 @@ export default function UserModal() {
 
   const onFormSubmit = async () => {
     const db = firebase.firestore();
+    if (title === '' || description === '') {
+      console.log('Error');
+      return;
+    }
 
     const res = await db.collection('events').add({
       title,
