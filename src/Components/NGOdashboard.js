@@ -13,8 +13,6 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
-import { red } from '@material-ui/core/colors';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -64,9 +62,8 @@ function NGOdashboard() {
   };
 
   useEffect(() => {
-    setUid(firebase.auth().currentUser.uid);
     let dataItems = [];
-
+    if (firebase.auth().currentUser) setUid(firebase.auth().currentUser.uid);
     const getdata = async () => {
       if (uid != '') {
         const NGOevents = db.collection('NGOevents').doc(uid);
