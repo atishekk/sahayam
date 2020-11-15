@@ -112,6 +112,7 @@ export default function PersistentDrawerLeft({ role }) {
 
   const handleDrawerOpen = () => {
     setOpen(true);
+    console.log(role);
   };
 
   const handleDrawerClose = () => {
@@ -180,7 +181,7 @@ export default function PersistentDrawerLeft({ role }) {
             </List>
             <Divider />
             <List>
-              {role === 'Volunteer' && (
+              {role === 'volunteer' && (
                 <Link to="/dashboardUser" className={classes.LinkStyle}>
                   <ListItem button key="dashboardUser">
                     <ListItemIcon>
