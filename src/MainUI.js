@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft({ role }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -160,41 +160,47 @@ export default function PersistentDrawerLeft() {
             </div>
             <Divider />
             <List>
-              <ListItem button key="signup">
-                <ListItemIcon>
-                  <PersonAddIcon />
-                </ListItemIcon>
-                <Link to="/createuser" className={classes.LinkStyle}>
+              <Link to="/createuser" className={classes.LinkStyle}>
+                <ListItem button key="signup">
+                  <ListItemIcon>
+                    <PersonAddIcon />
+                  </ListItemIcon>
+
                   <ListItemText primary="Sign Up" />
-                </Link>
-              </ListItem>
-              <ListItem button key="signin">
-                <ListItemIcon>
-                  <AccountCircleIcon />
-                </ListItemIcon>
-                <Link to="/signin" className={classes.LinkStyle}>
+                </ListItem>
+              </Link>
+              <Link to="/signin" className={classes.LinkStyle}>
+                <ListItem button key="signin">
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
                   <ListItemText primary="Sign In" />
-                </Link>
-              </ListItem>
+                </ListItem>
+              </Link>
             </List>
             <Divider />
             <List>
-              <ListItem button key="dashboardUser">
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
+              {role === 'Volunteer' && (
                 <Link to="/dashboardUser" className={classes.LinkStyle}>
-                  <ListItemText primary="Dashboard" />
+                  <ListItem button key="dashboardUser">
+                    <ListItemIcon>
+                      <DashboardIcon />
+                    </ListItemIcon>
+
+                    <ListItemText primary="Dashboard" />
+                  </ListItem>
                 </Link>
-              </ListItem>
-              <ListItem button key="dashboardNGO">
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
+              )}
+              {role === 'NGO' && (
                 <Link to="/dashboardNGO" className={classes.LinkStyle}>
-                  <ListItemText primary="Dashboard" />
+                  <ListItem button key="dashboardNGO">
+                    <ListItemIcon>
+                      <DashboardIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Dashboard" />
+                  </ListItem>
                 </Link>
-              </ListItem>
+              )}
             </List>
           </Drawer>
           <main

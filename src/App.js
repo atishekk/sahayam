@@ -7,17 +7,19 @@ import SignIn from './Components/SignIn';
 import UserDashBoard from './Components/Userdashboard';
 
 const App = () => {
-    return (
-        <React.Fragment>
-            <MainUI/>
-            <Switch>
-                <Route path="/createuser" component={CreateUser}/>
-                <Route path="/signin" component={SignIn} />
-                <Route path="/dashboardUser" component={UserDashBoard} />
-                <Route path="/dashboardNGO" component={NGODashBoard} />
-            </Switch>
-        </React.Fragment>
-    )
-}
+  const [role, setRole] = React.useState('');
+
+  return (
+    <React.Fragment>
+      <MainUI role={role} />
+      <Switch>
+        <Route path="/createuser" component={CreateUser} />
+        <Route path="/signin" render={(props) => <SignIn {...props} setRole={setRole} />} />
+        <Route path="/dashboardUser" component={UserDashBoard} />
+        <Route path="/dashboardNGO" component={NGODashBoard} />
+      </Switch>
+    </React.Fragment>
+  );
+};
 
 export default App;

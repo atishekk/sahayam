@@ -42,18 +42,23 @@ const theme = createMuiTheme({
   }
 });
 
-function SignIn() {
+function SignIn({ setRole }) {
   const classes = useStyles();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [uid, setUid] = useState('');
+
   const onFormSubmit = async () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(function () {
-        console.log('signed in');
+      .then(function (data) {
+        setUid(data.user.uid);
+        setTimeout(() => {
+          if (uid === '') setUid(data.user.uid);
+        }, 1000);
       })
       .catch(function (error) {
         // Handle Errors here.
@@ -61,6 +66,17 @@ function SignIn() {
         var errorMessage = error.message;
         // ...
       });
+    const db = firebase.firestore();
+
+    if (uid != '') {
+      const accountsRef = db.collection('accounts').doc(uid);
+      const doc = await accountsRef.get();
+      if (!doc.exists) {
+        console.log('No such document !');
+      } else {
+        setRole(doc.data().role);
+      }
+    }
   };
 
   return (

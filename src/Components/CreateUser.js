@@ -71,28 +71,33 @@ function CreateUser() {
     try {
       if (password === confirmPassword)
         await Auth.createUserWithEmailAndPassword(email, password)
-          .then(function (data) {
+          .then(async function (data) {
             setUid(data.user.uid);
+
+            const id = await data.user.uid;
+
+            if (uid === '') setUid(id);
           })
           .catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
+            console.log(errorMessage);
             // ...
           });
       else throw new Error("Passwords don't match");
     } catch (error) {
       console.log(error.message);
     }
-    const db = firebase.firestore();
-    if (uid != '') {
-      const accountsRef = await db.collection('accounts').doc(uid);
+
+    setTimeout(() => {
+      const db = firebase.firestore();
+      const accountsRef = db.collection('accounts').doc(uid);
       const addData = accountsRef.set({
         role
       });
-
-      console.log(addData);
-    }
+      console.log('role : ', role, uid, addData);
+    }, 5000);
   };
 
   return (
