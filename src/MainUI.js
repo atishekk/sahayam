@@ -139,9 +139,11 @@ export default function PersistentDrawerLeft({ role }) {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" noWrap>
-                Sahayam
-              </Typography>
+              <Link to="/">
+                <Typography variant="h6" noWrap>
+                  Sahayam
+                </Typography>
+              </Link>
             </Toolbar>
           </AppBar>
           <Drawer
@@ -180,7 +182,7 @@ export default function PersistentDrawerLeft({ role }) {
             </List>
             <Divider />
             <List>
-              {role === 'Volunteer' && (
+              {role === 'volunteer' && (
                 <Link to="/dashboardUser" className={classes.LinkStyle}>
                   <ListItem button key="dashboardUser">
                     <ListItemIcon>

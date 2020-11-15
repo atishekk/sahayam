@@ -8,21 +8,6 @@ import UserDashBoard from './Components/Userdashboard';
 import AboutUs from "./Components/AboutUS"
 
 const App = () => {
-<<<<<<< HEAD
-    return (
-        <React.Fragment>
-            <MainUI/>
-            <Switch>
-                <Route exact path="/" component={AboutUs} />
-                <Route path="/createuser" component={CreateUser}/>
-                <Route path="/signin" component={SignIn} />
-                <Route path="/dashboardUser" component={UserDashBoard} />
-                <Route path="/dashboardNGO" component={NGODashBoard} />
-            </Switch>
-        </React.Fragment>
-    )
-}
-=======
   const [role, setRole] = React.useState('');
 
   return (
@@ -37,6 +22,5 @@ const App = () => {
     </React.Fragment>
   );
 };
->>>>>>> 9a6823eec9bb25028e3ba14c21fae906ddaf0321
 
 export default App;
