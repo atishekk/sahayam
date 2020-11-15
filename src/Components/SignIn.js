@@ -72,7 +72,7 @@ function SignIn() {
             style={{ backgroundColor: '#fff', height: '45vh', marginTop: '10px' }}
           >
             <Typography variant="h4" style={{ textAlign: 'center' }}>
-              SIGNIN
+              SIGN IN
             </Typography>
             <div className={classes.root}>
               <Grid container spacing={1}>

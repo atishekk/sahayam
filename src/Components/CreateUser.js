@@ -59,22 +59,29 @@ function CreateUser() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const onFormSubmit = async () => {
     if (email === '' || password === '') {
       console.log('email password cant be blank');
     }
-
-    Auth.createUserWithEmailAndPassword(email, password)
-      .then(function () {
-        console.log('added');
-      })
-      .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
+    try{
+      if(password === confirmPassword)
+        Auth.createUserWithEmailAndPassword(email, password)
+            .then(function () {
+              console.log('added');
+            })
+            .catch(function (error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // ...
+            });
+      else
+        throw new Error("Passwords don't match")
+    }catch(error){
+      console.log(error.message)
+    }
   };
 
   return (
@@ -83,10 +90,10 @@ function CreateUser() {
         <Container maxWidth="md" className={classes.containerStyle}>
           <Typography
             component="div"
-            style={{ backgroundColor: '#fff', height: '45vh', marginTop: '10px' }}
+            style={{ backgroundColor: '#fff', height: '60vh' }}
           >
-            <Typography variant="h4" style={{ textAlign: 'center' }}>
-              SIGNUP
+            <Typography variant="h4" style={{ textAlign: 'center', marginTop: "10px" }}>
+              SIGN UP
             </Typography>
             <div>
               <Grid container spacing={1}>
@@ -119,6 +126,22 @@ function CreateUser() {
                       value={password}
                       fullWidth
                       onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </Grid>
+                </Grid>
+                <Grid container item xs={12} spacing={3} className={classes.inputContainer}>
+                  <Grid item xs={4}>
+                    <Typography className={classes.labelStyles}>Confirm Password</Typography>
+                  </Grid>
+                  <Grid item xs={8}>
+                    <TextField
+                        type="password"
+                        variant="standard"
+                        label="Password"
+                        className={classes.inputStyles}
+                        value={confirmPassword}
+                        fullWidth
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                   </Grid>
                 </Grid>
