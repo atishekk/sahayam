@@ -141,7 +141,7 @@ export default function PersistentDrawerLeft({ role }) {
                 <MenuIcon />
               </IconButton>
               <Link to="/">
-                <Typography variant="h6" noWrap style={{ textDecoration: 'none', color: '#fff' }}>
+                <Typography variant="h4" noWrap style={{ textDecoration: 'none', color: '#fff' }}>
                   Sahayam
                 </Typography>
               </Link>
