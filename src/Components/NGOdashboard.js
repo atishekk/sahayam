@@ -1,34 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import React, { useState, useEffect } from "react";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import EventInput from './Modal/EventInput';
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import EventInput from "./Modal/EventInput";
 
 const useStyles = makeStyles({
   EventContainer: {
-    marginTop: '40px',
-    paddingTop: '20px',
-    paddingLeft: '20px',
-    paddingRight: '20px'
-  }
+    marginTop: "40px",
+    paddingTop: "20px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
+  },
 });
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#2196f3'
+      main: "#2196f3",
     },
     secondary: {
-      main: '#f50057'
-    }
+      main: "#f50057",
+    },
   },
   typography: {
-    fontFamily: ['Lato', 'sans-serif', '-apple-system', 'BlinkMacSystemFont'].join(',')
-  }
+    fontFamily: [
+      "Lato",
+      "sans-serif",
+      "-apple-system",
+      "BlinkMacSystemFont",
+    ].join(","),
+  },
 });
 
 function NGOdashboard() {
@@ -36,21 +41,21 @@ function NGOdashboard() {
 
   const db = firebase.firestore();
   const [show, setShow] = useState(false);
-  const [uid, setUid] = useState('');
-  const [events, setEvents] = useState('');
+  const [uid, setUid] = useState("");
+  const [events, setEvents] = useState("");
 
   useEffect(() => {
     setUid(firebase.auth().currentUser.uid);
     let dataItems = [];
 
     const getdata = async () => {
-      if (uid != '') {
-        const NGOevents = db.collection('NGOevents').doc(uid);
+      if (uid != "") {
+        const NGOevents = db.collection("NGOevents").doc(uid);
         const listOfEvents = await NGOevents.get();
         if (listOfEvents.data() != null) dataItems = listOfEvents.data().events;
       }
 
-      const eventsRef = db.collection('events');
+      const eventsRef = db.collection("events");
       const snapshot = await eventsRef.get();
 
       let documents = [];
@@ -70,7 +75,7 @@ function NGOdashboard() {
           date: doc.date,
           time: doc.time,
           image: doc.image,
-          sugg: doc.sugg
+          sugg: doc.sugg,
         };
       });
       setEvents(newData);
@@ -84,6 +89,8 @@ function NGOdashboard() {
     return (
       <Grid item sm={3} xs={12} key={id}>
         <h1>{title}</h1>
+        <h1>{description}</h1>
+        <h1>{date}</h1>
       </Grid>
     );
   };
