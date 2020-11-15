@@ -5,6 +5,8 @@ import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/sty
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+import { Auth } from '../firebase/config';
+
 const useStyles = makeStyles({
   containerStyle: {
     marginTop: '80px',
@@ -41,16 +43,14 @@ const theme = createMuiTheme({
   }
 });
 
-function EventInput() {
+function CreateUser() {
   const classes = useStyles();
 
   const [email, setEmail] = useState('');
-  const [password, setPassword] = setPassword('');
+  const [password, setPassword] = useState('');
 
   const onFormSubmit = async () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
+    Auth.createUserWithEmailAndPassword(email, password)
       .then(function () {
         console.log('added');
       })
@@ -71,7 +71,7 @@ function EventInput() {
             style={{ backgroundColor: '#fff', height: '45vh', marginTop: '10px' }}
           >
             <Typography variant="h4" style={{ textAlign: 'center' }}>
-              ENTER DETAILS
+              SIGNUP
             </Typography>
             <div className={classes.root}>
               <Grid container spacing={1}>
@@ -97,6 +97,7 @@ function EventInput() {
                   </Grid>
                   <Grid item xs={8}>
                     <TextField
+                      type="password"
                       variant="standard"
                       label="Password"
                       className={classes.inputStyles}
@@ -123,4 +124,4 @@ function EventInput() {
   );
 }
 
-export default EventInput;
+export default CreateUser;
