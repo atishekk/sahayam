@@ -66,7 +66,11 @@ function SignIn() {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Container maxWidth="md" className={classes.containerStyle}>
+        <Container
+          maxWidth="md"
+          className={classes.containerStyle}
+          style={{ backgroundColor: '#fff' }}
+        >
           <Typography
             component="div"
             style={{ backgroundColor: '#fff', height: '45vh', marginTop: '10px' }}
