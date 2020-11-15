@@ -9,6 +9,7 @@ import AboutUs from "./Components/AboutUS"
 
 const App = () => {
   const [role, setRole] = React.useState('');
+  const [uid, setUid] = React.useState('');
 
   return (
     <React.Fragment>
@@ -16,9 +17,12 @@ const App = () => {
       <Switch>
           <Route exact path="/" component={AboutUs} />
         <Route path="/createuser" component={CreateUser} />
-        <Route path="/signin" render={(props) => <SignIn {...props} setRole={setRole} />} />
+        <Route
+          path="/signin"
+          render={(props) => <SignIn {...props} setRole={setRole} setUid={setUid} />}
+        />
         <Route path="/dashboardUser" component={UserDashBoard} />
-        <Route path="/dashboardNGO" component={NGODashBoard} />
+        <Route path="/dashboardNGO" component={NGODashBoard} uid={uid} />
       </Switch>
     </React.Fragment>
   );

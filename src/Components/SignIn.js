@@ -42,25 +42,26 @@ const theme = createMuiTheme({
   }
 });
 
-function SignIn({ setRole }) {
+function SignIn({ setRole, setUid }) {
   const classes = useStyles();
   const db = firebase.firestore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [uid, setUid] = useState('');
-
   const onFormSubmit = async () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(async function (data) {
+        console.log('here1');
         return data.user.uid;
       })
       .then(async function (id) {
+        console.log(id);
         const doc = await db.collection('accounts').doc(id).get();
         setRole(doc.data().role);
+        setUid(id);
       })
       .catch(function (error) {
         // Handle Errors here.

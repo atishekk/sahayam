@@ -112,6 +112,7 @@ export default function PersistentDrawerLeft({ role }) {
 
   const handleDrawerOpen = () => {
     setOpen(true);
+    console.log(role);
   };
 
   const handleDrawerClose = () => {
