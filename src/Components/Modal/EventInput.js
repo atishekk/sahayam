@@ -73,8 +73,69 @@ export default function UserModal({ user, signIn }) {
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper} style={{ position: 'relative' }}>
-            <h1>this is modal content</h1>
+          <div className={classes.paper} style={{ position: "relative" }}>
+            {/* <h1>this is modal content</h1> */}
+            <ThemeProvider theme={theme}>
+              <Container
+                maxWidth="md"
+                className={classes.containerStyle}
+                style={{ backgroundColor: "#fff" }}
+              >
+                <Typography
+                  component="div"
+                  style={{
+                    backgroundColor: "#fff",
+                    height: "45vh",
+                    marginTop: "10px",
+                  }}
+                >
+                  <Typography variant="h4" style={{ textAlign: "center" }}>
+                    Add Event
+                  </Typography>
+                  <div className={classes.root}>
+                    <Grid container spacing={1}>
+                      <Grid
+                        container
+                        item
+                        xs={12}
+                        spacing={3}
+                        className={classes.inputContainer}
+                      >
+                        <Grid item xs={4}>
+                          <Typography className={classes.labelStyles}>
+                            Title
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <TextField
+                            type="text"
+                            variant="standard"
+                            label="Title"
+                            className={classes.inputStyles}
+                            value={email}
+                            fullWidth
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </Grid>
+                      </Grid>
+                      
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{
+                          margin: "60px auto",
+                          borderRadius: "50px",
+                          padding: "12px 20px",
+                        }}
+                        // onClick={onFormSubmit}
+                      >
+                        Submit
+                      </Button>
+                    </Grid>
+                  </div>
+                </Typography>
+              </Container>
+            </ThemeProvider>
           </div>
         </Fade>
       </Modal>
