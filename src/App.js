@@ -7,7 +7,7 @@ import SignIn from "./Components/SignIn"
 import UserDashBoard from "./Components/Userdashboard"
 
 
-const MainRouter = () => {
+const App = () => {
     return (
         <React.Fragment>
             <Switch>
@@ -21,4 +21,4 @@ const MainRouter = () => {
     )
 }
 
-export default MainRouter
+export default App
