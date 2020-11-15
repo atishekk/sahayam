@@ -14,6 +14,7 @@ const App = () => {
     <React.Fragment>
       <MainUI role={role} />
       <Switch>
+          <Route exact path="/" component={AboutUs} />
         <Route path="/createuser" component={CreateUser} />
         <Route path="/signin" render={(props) => <SignIn {...props} setRole={setRole} />} />
         <Route path="/dashboardUser" component={UserDashBoard} />
