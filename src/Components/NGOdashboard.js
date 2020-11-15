@@ -10,6 +10,7 @@ import EventInput from './Modal/EventInput';
 
 const useStyles = makeStyles({
   EventContainer: {
+    marginTop: '40px',
     paddingTop: '20px',
     paddingLeft: '20px',
     paddingRight: '20px'
@@ -46,7 +47,7 @@ function NGOdashboard() {
       if (uid != '') {
         const NGOevents = db.collection('NGOevents').doc(uid);
         const listOfEvents = await NGOevents.get();
-        dataItems = listOfEvents.data().events;
+        if (listOfEvents.data() != null) dataItems = listOfEvents.data().events;
       }
 
       const eventsRef = db.collection('events');
@@ -67,6 +68,7 @@ function NGOdashboard() {
           title: doc.title,
           description: doc.description,
           date: doc.date,
+          time: doc.time,
           image: doc.image,
           sugg: doc.sugg
         };
@@ -78,10 +80,10 @@ function NGOdashboard() {
   }, [events]);
 
   const getEventCard = (id) => {
-    const { title, description, date, image, sugg } = events[id];
+    const { title, description, date, time, image, sugg } = events[id];
     return (
       <Grid item sm={3} xs={12} key={id}>
-        {(title, description, date)}
+        <h1>{title}</h1>
       </Grid>
     );
   };
