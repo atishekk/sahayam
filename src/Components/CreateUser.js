@@ -56,6 +56,7 @@ const theme = createMuiTheme({
 
 function CreateUser() {
   const classes = useStyles();
+  const db = firebase.firestore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -72,11 +73,12 @@ function CreateUser() {
       if (password === confirmPassword)
         await Auth.createUserWithEmailAndPassword(email, password)
           .then(async function (data) {
-            setUid(data.user.uid);
-
-            const id = await data.user.uid;
-
-            if (uid === '') setUid(id);
+            return db.collection('accounts').doc(data.user.uid).set({
+              role
+            });
+          })
+          .then(function (obj) {
+            console.log(obj);
           })
           .catch(function (error) {
             // Handle Errors here.
@@ -89,15 +91,6 @@ function CreateUser() {
     } catch (error) {
       console.log(error.message);
     }
-
-    setTimeout(() => {
-      const db = firebase.firestore();
-      const accountsRef = db.collection('accounts').doc(uid);
-      const addData = accountsRef.set({
-        role
-      });
-      console.log('role : ', role, uid, addData);
-    }, 5000);
   };
 
   return (

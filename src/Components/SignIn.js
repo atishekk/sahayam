@@ -44,6 +44,7 @@ const theme = createMuiTheme({
 
 function SignIn({ setRole }) {
   const classes = useStyles();
+  const db = firebase.firestore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -54,29 +55,20 @@ function SignIn({ setRole }) {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(function (data) {
-        setUid(data.user.uid);
-        setTimeout(() => {
-          if (uid === '') setUid(data.user.uid);
-        }, 1000);
+      .then(async function (data) {
+        return data.user.uid;
+      })
+      .then(async function (id) {
+        const doc = await db.collection('accounts').doc(id).get();
+        setRole(doc.data().role);
       })
       .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        console.log(errorMessage);
         // ...
       });
-    const db = firebase.firestore();
-
-    if (uid != '') {
-      const accountsRef = db.collection('accounts').doc(uid);
-      const doc = await accountsRef.get();
-      if (!doc.exists) {
-        console.log('No such document !');
-      } else {
-        setRole(doc.data().role);
-      }
-    }
   };
 
   return (
