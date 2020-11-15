@@ -6,6 +6,7 @@ import { Radio, RadioGroup, FormControlLabel } from '@material-ui/core';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
 
 import { Auth } from '../firebase/config';
 
@@ -60,27 +61,37 @@ function CreateUser() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [uid, setUid] = useState('');
 
   const onFormSubmit = async () => {
     if (email === '' || password === '') {
       console.log('email password cant be blank');
     }
-    try{
-      if(password === confirmPassword)
-        Auth.createUserWithEmailAndPassword(email, password)
-            .then(function () {
-              console.log('added');
-            })
-            .catch(function (error) {
-              // Handle Errors here.
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              // ...
-            });
-      else
-        throw new Error("Passwords don't match")
-    }catch(error){
-      console.log(error.message)
+
+    try {
+      if (password === confirmPassword)
+        await Auth.createUserWithEmailAndPassword(email, password)
+          .then(function (data) {
+            setUid(data.user.uid);
+          })
+          .catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+          });
+      else throw new Error("Passwords don't match");
+    } catch (error) {
+      console.log(error.message);
+    }
+    const db = firebase.firestore();
+    if (uid != '') {
+      const accountsRef = await db.collection('accounts').doc(uid);
+      const addData = accountsRef.set({
+        role
+      });
+
+      console.log(addData);
     }
   };
 
@@ -92,11 +103,8 @@ function CreateUser() {
           className={classes.containerStyle}
           style={{ backgroundColor: '#fff' }}
         >
-          <Typography
-            component="div"
-            style={{ backgroundColor: '#fff', height: '60vh' }}
-          >
-            <Typography variant="h4" style={{ textAlign: 'center', marginTop: "10px" }}>
+          <Typography component="div" style={{ backgroundColor: '#fff', height: '60vh' }}>
+            <Typography variant="h4" style={{ textAlign: 'center', marginTop: '10px' }}>
               SIGN UP
             </Typography>
             <div>
@@ -139,13 +147,13 @@ function CreateUser() {
                   </Grid>
                   <Grid item xs={8}>
                     <TextField
-                        type="password"
-                        variant="standard"
-                        label="Password"
-                        className={classes.inputStyles}
-                        value={confirmPassword}
-                        fullWidth
-                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      type="password"
+                      variant="standard"
+                      label="Password"
+                      className={classes.inputStyles}
+                      value={confirmPassword}
+                      fullWidth
+                      onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                   </Grid>
                 </Grid>
