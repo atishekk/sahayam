@@ -1,8 +1,10 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
 import {Paper} from "@material-ui/core";
+import one from "../../src/assets/1.png"
+import two from "../../src/assets/2.png"
 
-const imageSource = []
+const imageSource = [one, two]
 
 const AboutUS = () => {
     return (

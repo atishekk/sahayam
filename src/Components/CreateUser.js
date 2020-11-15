@@ -56,6 +56,7 @@ const theme = createMuiTheme({
 
 function CreateUser() {
   const classes = useStyles();
+  const db = firebase.firestore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,27 +72,24 @@ function CreateUser() {
     try {
       if (password === confirmPassword)
         await Auth.createUserWithEmailAndPassword(email, password)
-          .then(function (data) {
-            setUid(data.user.uid);
+          .then(async function (data) {
+            return db.collection('accounts').doc(data.user.uid).set({
+              role
+            });
+          })
+          .then(function (obj) {
+            console.log(obj);
           })
           .catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
+            console.log(errorMessage);
             // ...
           });
       else throw new Error("Passwords don't match");
     } catch (error) {
       console.log(error.message);
-    }
-    const db = firebase.firestore();
-    if (uid != '') {
-      const accountsRef = await db.collection('accounts').doc(uid);
-      const addData = accountsRef.set({
-        role
-      });
-
-      console.log(addData);
     }
   };
 

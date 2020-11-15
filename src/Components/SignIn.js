@@ -42,23 +42,31 @@ const theme = createMuiTheme({
   }
 });
 
-function SignIn() {
+function SignIn({ setRole }) {
   const classes = useStyles();
+  const db = firebase.firestore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [uid, setUid] = useState('');
 
   const onFormSubmit = async () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(function () {
-        console.log('signed in');
+      .then(async function (data) {
+        return data.user.uid;
+      })
+      .then(async function (id) {
+        const doc = await db.collection('accounts').doc(id).get();
+        setRole(doc.data().role);
       })
       .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
+        console.log(errorMessage);
         // ...
       });
   };
