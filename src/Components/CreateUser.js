@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Typography, TextField, Grid, Button, Chip } from '@material-ui/core';
 import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { database } from '../firebase/config';
+
 import firebase from 'firebase/app';
-import { Auth } from '../firebase/config';
+import 'firebase/auth';
 
 const useStyles = makeStyles({
   containerStyle: {
@@ -41,14 +41,16 @@ const theme = createMuiTheme({
   }
 });
 
-function EventInput({ uid }) {
+function EventInput() {
   const classes = useStyles();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = setPassword('');
 
   const onFormSubmit = async () => {
-    Auth.createUserWithEmailAndPassword(email, password)
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
       .then(function () {
         console.log('added');
       })
